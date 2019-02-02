@@ -11,7 +11,8 @@
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use App\Services\{
         CurrencyOneServices\CurrencyOneService,
-        CurrencyTwoServices\CurrencyTwoService
+        CurrencyTwoServices\CurrencyTwoService,
+        CurrencyThereServices\CurrencyThereService
     };
 
     class HomeController extends AbstractController
@@ -20,11 +21,14 @@
         {
             $currencyOneService = new CurrencyOneService();
             $currencyTwoService = new CurrencyTwoService();
+            $currencyThereService = new CurrencyThereService();
 
             $currenciesOne = $currencyOneService->get();
             $currenciesTwo = $currencyTwoService->get();
+            $currenciesThere = $currencyThereService->get();
 
             $currencies = $this->comparing($currenciesOne, $currenciesTwo);
+            $currencies = $this->comparing($currencies, $currenciesThere);
 
             return $this->render('home.html.twig', [
                 'currencies' => $currencies
