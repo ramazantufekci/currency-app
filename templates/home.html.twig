@@ -5,6 +5,11 @@
     <title> Currency App </title>
 </head>
 <body>
-    <h3>Hello {{ name }}</h3>
+    <h3>Currency App </h3>
+    <ul>
+        {% for key,currency in currencies %}
+            <li>{{ key }} : {{ currency }} </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
