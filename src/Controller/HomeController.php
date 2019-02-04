@@ -28,8 +28,7 @@
             $currenciesTwo = $currencyTwoService->get();
             $currenciesThere = $currencyThereService->get();
 
-            $currencies = $this->comparing($currenciesOne, $currenciesTwo);
-            $currencies = $this->comparing($currencies, $currenciesThere);
+            $currencies = $this->comparing([ $currenciesOne, $currenciesTwo, $currenciesThere ]);
 
             $currenciesAll = $this->getDoctrine()
                 ->getRepository(Currency::class)
@@ -37,29 +36,37 @@
 
             return $this->render('home.html.twig', [
                 'currencies' => $currencies,
-                'currenciesAll' => $currenciesAll
+                'currenciesAll' => $currenciesAll,
             ]);
         }
 
-        function comparing($currenciesOne, $currenciesTwo)
+        private function comparing($arrays = [])
         {
-            $currenciesOneCount = count($currenciesOne);
-            $currenciesTwoCount = count($currenciesTwo);
+            $arrayOne = $arrays[0];
+            $arrayTwo = $arrays[1];
 
-            if (($currenciesOneCount === $currenciesTwoCount) || $currenciesOneCount > $currenciesTwoCount) {
-                $oneArray = $currenciesOne;
-                $twoArray = $currenciesTwo;
-            } elseif ($currenciesTwoCount > $currenciesOneCount ) {
-                $oneArray = $currenciesTwo;
-                $twoArray = $currenciesOne;
+            $arrayOneCount = count($arrayOne);
+            $arrayTwoCount = count($arrayTwo);
+
+            if (($arrayOneCount === $arrayTwoCount) || $arrayOneCount > $arrayTwoCount) {
+                $oneArray = $arrayOne;
+                $twoArray = $arrayTwo;
+            } elseif ($arrayTwoCount > $arrayOneCount) {
+                $oneArray = $arrayTwo;
+                $twoArray = $arrayOne;
             }
 
-            foreach ($oneArray as $key => $value ) {
+            foreach ($oneArray as $key => $value) {
                 if (isset($twoArray[$key])) {
                     $currencies[$key] = $value < $twoArray[$key] ? $value : $twoArray[$key];
                 } else {
                     $currencies[$key] = $value;
                 }
+            }
+
+            if (isset($arrays[2])) {
+                $arrays = array_splice($arrays, 2, 2);
+                $currencies = $this->comparing(array_merge([$currencies], $arrays));
             }
 
             return $currencies;
