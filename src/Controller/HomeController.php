@@ -42,6 +42,12 @@
 
         private function comparing($arrays = [])
         {
+            if (!isset($arrays[0])) {
+                return [];
+            } elseif (!isset($arrays[1])) {
+                return $arrays[0];
+            };
+
             $arrayOne = $arrays[0];
             $arrayTwo = $arrays[1];
 

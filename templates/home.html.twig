@@ -149,28 +149,30 @@
                 {% endfor %}
             </ul>
         </div>
-        <table class="currencies">
-            <thead>
-                <tr>
-                    <th>BUSINESS NAME</th>
-                    <th>USD</th>
-                    <th>EUR</th>
-                    <th>GBP</th>
-                    <th>DATE</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for currencies in currenciesAll %}
+        {% if currenciesAll %}
+            <table class="currencies">
+                <thead>
                     <tr>
-                        <td> {{ currencies.businessName }} </td>
-                        <td> {{ currencies.usd }} </td>
-                        <td> {{ currencies.eur }} </td>
-                        <td> {{ currencies.gbp }} </td>
-                        <td> {{ currencies.createDate | date('d.m.Y H:i:s') }} </td>
+                        <th>BUSINESS NAME</th>
+                        <th>USD</th>
+                        <th>EUR</th>
+                        <th>GBP</th>
+                        <th>DATE</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for currencies in currenciesAll %}
+                        <tr>
+                            <td> {{ currencies.businessName }} </td>
+                            <td> {{ currencies.usd }} </td>
+                            <td> {{ currencies.eur }} </td>
+                            <td> {{ currencies.gbp }} </td>
+                            <td> {{ currencies.createDate | date('d.m.Y H:i:s') }} </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif  %}
     </div>
 </body>
 </html>
