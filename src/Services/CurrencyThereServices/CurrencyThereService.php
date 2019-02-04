@@ -10,10 +10,12 @@
 
     class CurrencyThereService extends BaseService implements CurrencyThereServiceInterface
     {
+        public $business_name = 'CurrencyThere';
+
         public function get()
         {
             $currencies['USD'] = $this->usd();
-            $currencies['EURO'] = $this->euro();
+            $currencies['EUR'] = $this->eur();
             $currencies['GBP'] = $this->gbp();
 
             return $currencies;
@@ -24,7 +26,7 @@
             return 4.62;
         }
 
-        public function euro()
+        public function eur()
         {
             return 5.142;
         }

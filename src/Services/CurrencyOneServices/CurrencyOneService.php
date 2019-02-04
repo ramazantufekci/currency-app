@@ -10,6 +10,8 @@
 
     class CurrencyOneService extends BaseService
     {
+        public $business_name = 'CurrencyOne';
+
         public function get()
         {
             $currencies = $this->currencyOneClient->get('5a74519d2d0000430bfe0fa0');

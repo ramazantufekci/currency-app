@@ -8,6 +8,7 @@
 
     namespace App\Controller;
 
+    use App\Entity\Currency;
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use App\Services\{
         CurrencyOneServices\CurrencyOneService,
@@ -30,8 +31,13 @@
             $currencies = $this->comparing($currenciesOne, $currenciesTwo);
             $currencies = $this->comparing($currencies, $currenciesThere);
 
+            $currenciesAll = $this->getDoctrine()
+                ->getRepository(Currency::class)
+                ->findAll();
+
             return $this->render('home.html.twig', [
-                'currencies' => $currencies
+                'currencies' => $currencies,
+                'currenciesAll' => $currenciesAll
             ]);
         }
 

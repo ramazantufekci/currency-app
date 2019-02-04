@@ -3,13 +3,174 @@
 <head>
     <meta charset="UTF-8">
     <title> Currency App </title>
+    <style type="text/css">
+        @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+        body {
+            background-color: #3e94ec;
+            font-family: "Roboto", helvetica, arial, sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            text-rendering: optimizeLegibility;
+        }
+
+        .main {
+            max-width: 800px;
+            width: 100%;
+            margin: 0px auto;
+        }
+
+        h3 {
+            color: #fafafa;
+            font-size: 30px;
+            font-weight: 700;
+            font-style: normal;
+            font-family: "Roboto", helvetica, arial, sans-serif;
+            text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+            text-transform:uppercase;
+        }
+
+        .cheap-currencies {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cheap-currencies li {
+            background: white;
+            display: block;
+            float: left;
+            width: calc(90.2% / 3);
+            padding: 13px;
+            text-align: center;
+            vertical-align: middle;
+            font-weight:300;
+            font-size:16px;
+        }
+
+        .cheap-currencies li:first-child {
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        .cheap-currencies li:last-child {
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .currencies {
+            background: white;
+            border-radius:3px;
+            border-collapse: collapse;
+            width: 100%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            animation: float 5s infinite;
+        }
+
+        th {
+            color: white;
+            background: #0072ec;
+            border-bottom: 2px solid #c1c3d1;
+            border-right: 1px solid #c1c3d1;
+            font-size:18px;
+            font-weight: 400;
+            padding:14px;
+            text-align: center;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            vertical-align:middle;
+        }
+
+        th:first-child {
+            border-top-left-radius:3px;
+        }
+
+        th:last-child {
+            border-top-right-radius:3px;
+            border-right:none;
+        }
+
+        tr {
+            border-top: 1px solid #C1C3D1;
+            border-bottom-: 1px solid #C1C3D1;
+            color:#666B85;
+            font-size:16px;
+            font-weight:normal;
+            text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+        }
+
+        tr:first-child {
+            border-top:none;
+        }
+
+        tr:last-child {
+            border-bottom:none;
+        }
+
+        tr:nth-child(odd) td {
+            background:#EBEBEB;
+        }
+
+        tr:last-child td:first-child {
+            border-bottom-left-radius:3px;
+        }
+
+        tr:last-child td:last-child {
+            border-bottom-right-radius:3px;
+        }
+
+        td {
+            background:#FFFFFF;
+            padding: 13px;
+            text-align: center;
+            vertical-align:middle;
+            font-weight:300;
+            font-size:16px;
+            text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+            border-right: 1px solid #C1C3D1;
+        }
+
+        td:last-child {
+            border-right: 0px;
+        }
+
+        .mb-2 {
+            display: flow-root;
+            margin-bottom: 2rem !important;
+        }
+
+    </style>
 </head>
 <body>
-    <h3>Currency App </h3>
-    <ul>
-        {% for key,currency in currencies %}
-            <li>{{ key }} : {{ currency }} </li>
-        {% endfor %}
-    </ul>
+    <div class="main">
+        <h3>Currency App</h3>
+        <div class="mb-2">
+            <ul class="cheap-currencies">
+                {% for key,currency in currencies %}
+                    <li>{{ key }} : {{ currency }} </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <table class="currencies">
+            <thead>
+                <tr>
+                    <th>BUSINESS NAME</th>
+                    <th>USD</th>
+                    <th>EUR</th>
+                    <th>GBP</th>
+                    <th>DATE</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for currencies in currenciesAll %}
+                    <tr>
+                        <td> {{ currencies.businessName }} </td>
+                        <td> {{ currencies.usd }} </td>
+                        <td> {{ currencies.eur }} </td>
+                        <td> {{ currencies.gbp }} </td>
+                        <td> {{ currencies.createDate | date('d.m.Y H:i:s') }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

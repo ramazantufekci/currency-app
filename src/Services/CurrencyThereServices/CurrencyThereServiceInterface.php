@@ -13,5 +13,5 @@
         public function get();
         public function usd();
         public function gbp();
-        public function euro();
+        public function eur();
     }
